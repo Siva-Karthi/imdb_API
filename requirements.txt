@@ -1,0 +1,6 @@
+Django==1.11.7
+argparse==1.2.1
+djangorestframework==3.7.3
+gunicorn==19.7.1
+pytz==2017.3
+wsgiref==0.1.2
