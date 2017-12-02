@@ -9,12 +9,15 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 
 from api.models import Movie
 from api.serializers import MovieSerializer
+from .permissions import IsAdminOrReadOnly
 
 
 class MovieCreateView(ListCreateAPIView):
     queryset = Movie.objects.all()
     serializer_class = MovieSerializer
+    permission_classes = (IsAdminOrReadOnly, )
 
 class MovieDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Movie.objects.all()
     serializer_class = MovieSerializer
+    permission_classes = (IsAdminOrReadOnly, )
