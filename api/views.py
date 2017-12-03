@@ -7,17 +7,17 @@ from django.shortcuts import render
 
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
-from api.models import Movie
+from api.models import MovieModel
 from api.serializers import MovieSerializer
 from .permissions import IsAdminOrReadOnly
 
 
 class MovieCreateView(ListCreateAPIView):
-    queryset = Movie.objects.all()
+    queryset = MovieModel.objects.all()
     serializer_class = MovieSerializer
     permission_classes = (IsAdminOrReadOnly, )
 
 class MovieDetailView(RetrieveUpdateDestroyAPIView):
-    queryset = Movie.objects.all()
+    queryset = MovieModel.objects.all()
     serializer_class = MovieSerializer
     permission_classes = (IsAdminOrReadOnly, )
