@@ -10,4 +10,3 @@ urlpatterns = [
     # url(r'^movies/(?P<pk>[0-9]+)[/]*$', MovieDetailView.as_view(), name='detail'),
     url('^search/(?P<movie_name>\w+)/$', SearchAPIView.as_view())
 ]
-

@@ -24,6 +24,7 @@
 from rest_framework import exceptions
 from rest_framework import serializers
 from .models import MovieModel, GenreModel
+from rest_framework.validators import UniqueValidator
 
 
 class GenreSerializer(serializers.ModelSerializer):
@@ -36,6 +37,7 @@ class GenreSerializer(serializers.ModelSerializer):
 class MovieSerializer(serializers.ModelSerializer):
 
     genre = serializers.StringRelatedField(many=True)
+    # name = serializers.CharField(required=True, validators=[UniqueValidator(queryset=MovieModel.objects.all(), message = "Given movie already exists. Try update if any changes need.")])
 
     class Meta:
         model = MovieModel

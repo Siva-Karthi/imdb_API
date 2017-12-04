@@ -12,6 +12,8 @@ from api.models import MovieModel
 from api.serializers import MovieSerializer
 from .permissions import IsAdminOrReadOnly
 
+#from rest_framework.throttling import UserRateThrottle
+from throttles import BurstRateThrottle,SustainedRateThrottle
 
 class MovieCreateView(ListCreateAPIView):
     queryset = MovieModel.objects.all()
@@ -19,6 +21,11 @@ class MovieCreateView(ListCreateAPIView):
     permission_classes = (IsAdminOrReadOnly, )
 
 class MovieDetailView(RetrieveUpdateDestroyAPIView):
+
+    #Throttle gettting movie detail 
+    throttle_classes = (BurstRateThrottle,SustainedRateThrottle)
+    #throttle_scope = "uploads"
+
     queryset = MovieModel.objects.all()
     serializer_class = MovieSerializer
     permission_classes = (IsAdminOrReadOnly, )

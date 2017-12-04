@@ -126,5 +126,13 @@ STATIC_URL = '/static/'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
-    )
+    ),
+ 'DEFAULT_THROTTLE_CLASSES': (
+        'api.throttles.BurstRateThrottle',
+        'api.throttles.SustainedRateThrottle'
+    ),
+    'DEFAULT_THROTTLE_RATES': {
+        'burst': '3/min',
+        'sustained': '10/day'
+    }
 }
