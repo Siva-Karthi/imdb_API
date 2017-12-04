@@ -35,8 +35,7 @@ class GenreModel(models.Model):
 
 
 class MovieModel(models.Model):
-    #name = models.CharField(max_length=100, unique=True)
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     director = models.CharField(max_length=100)
     popularity_99 = models.DecimalField(max_digits=4, decimal_places=1)
     imdb_score = models.DecimalField(max_digits=4, decimal_places=1)

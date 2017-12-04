@@ -50,6 +50,12 @@ class MovieSerializer(serializers.ModelSerializer):
         return ret
 
     def to_internal_value(self, data):
+        name = data.get('name')
+        # validation for director
+        if not name:
+            raise exceptions.ValidationError({
+                                'name': 'This field is required.'
+                                })
         popularity_99 = data.get('99popularity')
         # validation for popularity_99
         if not popularity_99:
@@ -85,12 +91,6 @@ class MovieSerializer(serializers.ModelSerializer):
                                 'This field value should be between 0 to 10.'
                                 })
 
-        name = data.get('name')
-        # validation for director
-        if not name:
-            raise exceptions.ValidationError({
-                                'name': 'This field is required.'
-                                })
 
         return {
                 'popularity_99': float(popularity_99),
