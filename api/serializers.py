@@ -37,7 +37,7 @@ class GenreSerializer(serializers.ModelSerializer):
 class MovieSerializer(serializers.ModelSerializer):
 
     genre = serializers.StringRelatedField(many=True)
-    # name = serializers.CharField(required=True, validators=[UniqueValidator(queryset=MovieModel.objects.all(), message = "Given movie already exists. Try update if any changes need.")])
+    name = serializers.CharField(required=True, validators=[UniqueValidator(queryset=MovieModel.objects.all(), message = "Given movie already exists. Try update if any changes need.")])
 
     class Meta:
         model = MovieModel
@@ -48,6 +48,12 @@ class MovieSerializer(serializers.ModelSerializer):
         ret['99popularity'] = ret['popularity_99']
         del ret['popularity_99']
         return ret
+
+    def validate(self,data):
+        movie = data["name"]
+        movie_qs = MovieModel.objects.filter(name = movie)
+        if movie_qs.exists():
+            raise serializers.ValidationError("Movie already exists")
 
     def to_internal_value(self, data):
         name = data.get('name')
