@@ -18,7 +18,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # STATIC_ROOT = os.path.normpath(os.path.join(BASE_DIR, 'staticfiles'))
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'staticfiles'),
 )
 
 
@@ -31,7 +31,7 @@ SECRET_KEY = '=w_4_dep_$2g9f#57*ttf@3j#9$!al4f=h0=#t%an1d3g79m0&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['gofynd-movies.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1','gofynd-movies.herokuapp.com']
 
 
 # Application definition
