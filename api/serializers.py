@@ -54,6 +54,7 @@ class MovieSerializer(serializers.ModelSerializer):
         movie_qs = MovieModel.objects.filter(name = movie)
         if movie_qs.exists():
             raise serializers.ValidationError("Movie already exists")
+        return data
 
     def to_internal_value(self, data):
         name = data.get('name')
