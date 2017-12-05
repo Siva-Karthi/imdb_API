@@ -31,7 +31,7 @@ SECRET_KEY = '=w_4_dep_$2g9f#57*ttf@3j#9$!al4f=h0=#t%an1d3g79m0&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['gofynd-movies.herokuapp.com']
 
 
 # Application definition
