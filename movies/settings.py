@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'rest_framework', # add this
     'api', # add this
     'rest_framework.authtoken', # token based authentication
+    'movie_api',
 ]
 
 MIDDLEWARE = [
@@ -62,12 +63,18 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'movies.urls'
 
+# html file path for project
+# TEMPLATE_DIRS = (
+#          BASE_DIR + '/templates/',
+# ) 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR + '/templates/','templates'],
         'APP_DIRS': True,
         'OPTIONS': {
+            'debug': DEBUG,
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -77,7 +84,7 @@ TEMPLATES = [
         },
     },
 ]
-
+# for deployment 
 WSGI_APPLICATION = 'movies.wsgi.application'
 
 
@@ -139,15 +146,18 @@ STATIC_URL = '/static/'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ),
  'DEFAULT_THROTTLE_CLASSES': (
         'api.throttles.BurstRateThrottle',
         'api.throttles.SustainedRateThrottle'
     ),
     'DEFAULT_THROTTLE_RATES': {
-        'burst': '3/min',
-        'sustained': '10/day'
-    }
+        'burst': '300/min',
+        'sustained': '100000/day'
+    },
+
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
 }
 
 
