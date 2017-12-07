@@ -20,9 +20,9 @@ from rest_framework.authtoken.views import obtain_auth_token
 
 
 urlpatterns = [
-    url(r'^', include('movie_api.urls')), # add this line
+    # url(r'^', include('movie_api.urls')), # add this line
     url(r'^admin/', admin.site.urls),
     # url(r'^api/v1/', include('api.urls')), # add this line
     # url(r'^api-token-auth/', obtain_auth_token), # end point for admin creating auth tokens
-    # url(r'^api/v2/', include('movie_api.urls')), # add this line
+    url(r'^api/v2/', include('movie_api.urls')), # add this line
 ]
