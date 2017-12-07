@@ -15,8 +15,8 @@ from .views import (
 
 app_name = 'movie_api'
 urlpatterns = [    
-    url(r'^$', MovieListAPIView.as_view(), name='movies_list'),
-    # url(r'^$',login_view,name = 'home' ),
+    # url(r'^$', MovieListAPIView.as_view(), name='movies_list'),
+    url(r'^$',login_view,name = 'home' ),
     url(r'^login/',login_view,name = 'login' ),
     url(r'^logout/',logout_view,name = 'logout' ),
     url(r'^create/$', MovieCreateAPIView.as_view(), name='create'),
