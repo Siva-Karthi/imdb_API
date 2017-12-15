@@ -15,12 +15,16 @@ from .views import (
 
 app_name = 'movie_api'
 urlpatterns = [    
-    url(r'^list_movies/', MovieListAPIView.as_view(), name='movies_list'),
+    url(r'^list_movies/$', MovieListAPIView.as_view(), name='movies_list'),
     url(r'^$',login_view,name = 'home' ),
     url(r'^login/',login_view,name = 'login' ),
     url(r'^logout/',logout_view,name = 'logout' ),
     url(r'^create/$', MovieCreateAPIView.as_view(), name='create'),
-    url(r'^(?P<name>[\w-]+)/$', MovieDetailAPIView.as_view(), name='detail'),
-    url(r'^(?P<name>[\w-]+)/edit/$', MovieUpdateAPIView.as_view(), name='update'),
-    url(r'^(?P<name>[\w-]+)/delete/$', MovieDeleteAPIView.as_view(), name='delete')
+    # url(r'^(?P<name>[\w-]+)/$', MovieDetailAPIView.as_view(), name='detail'),
+    # url(r'^(?P<name>[\w-]+)/edit/$', MovieUpdateAPIView.as_view(), name='update'),
+    # url(r'^(?P<name>[\w-]+)/delete/$', MovieDeleteAPIView.as_view(), name='delete')
+    url(r'^(?P<name>[\w-]+( +\w+)*)/$', MovieDetailAPIView.as_view(), name='detail'),
+    url(r'^(?P<name>[\w-]+( +\w+)*)/edit/$', MovieUpdateAPIView.as_view(), name='update'),
+    url(r'^(?P<name>[\w-]+( +\w+)*)/delete/$', MovieDeleteAPIView.as_view(), name='delete')
+
 ]

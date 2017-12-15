@@ -94,7 +94,8 @@ class MovieSerializer(serializers.ModelSerializer):
                                 'director': 'This field is required.'
                                 })
 
-        genre = data.get('genre',["default"])
+        # genre = data.get('genre',["default"])
+        genre = data.get('genre',["Drama"])
 
         imdb_score = data.get('imdb_score')
         # validation for imdb_score
@@ -237,7 +238,7 @@ class MovieCreateSerializer(serializers.ModelSerializer):
                                 'director': 'This field is required.'
                                 })
 
-        genre = data.get('genre',["default"])
+        genre = data.get('genre',["Drama"])
         print  "genre her", genre
 
         imdb_score = data.get('imdb_score')

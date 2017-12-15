@@ -40,7 +40,7 @@ class MovieModel(models.Model):
     popularity_99 = models.DecimalField(max_digits=4, decimal_places=1)
     imdb_score = models.DecimalField(max_digits=4, decimal_places=1)
     genre = models.ManyToManyField(GenreModel)
-    search_fields = ['name','director']
+    search_fields = ['name','director','popularity_99','imdb_score']
 
     def __unicode__(self):
         return u'%s' % (self.name)

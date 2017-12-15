@@ -31,6 +31,9 @@ from rest_framework.filters import (
      OrderingFilter,
      )
 
+from paginations import ListMoviesPagination
+
+
 def login_view(request):
     title = "login"
     form = UserLoginForm(request.POST or None)
@@ -58,16 +61,39 @@ class MovieListAPIView(ListAPIView):
 	serializer_class = MovieListSerializer
         permission_classes = [IsAuthenticated]
         filter_backends = [SearchFilter]
-        search_fields = ['name','director']
+        pagination_class = ListMoviesPagination
+        search_fields = ['name','director','popularity_99','imdb_score']
         def get_queryset(self):
 	    queryset = MovieModel.objects.all()
             movie_to_search = self.request.query_params.get('name')
             director_to_search = self.request.query_params.get('director')
+            genre_to_search = self.request.query_params.get('genre')
+            popularity = self.request.query_params.get('popularity')
+            popularity_gt = self.request.query_params.get('popularity_gt')
+            popularity_lt = self.request.query_params.get('popularity_lt')
+            imdb_score_to_search = self.request.query_params.get('imdb_score')
+            imdb_score_gt = self.request.query_params.get('imdb_score_gt')
+            imdb_score_lt = self.request.query_params.get('imdb_score_lt')
+
             if movie_to_search:
-               queryset = queryset.filter(name=movie_to_search)
+               # queryset = queryset.filter(name=movie_to_search)
+               queryset = queryset.filter(name__iexact=movie_to_search)
             if director_to_search:
-               queryset = queryset.filter(director=director_to_search)
-                 
+               queryset = queryset.filter(director__iexact=director_to_search)
+            if genre_to_search:
+	       queryset = queryset.filter(genre__genre_name__iexact=genre_to_search)
+            if  popularity:
+               queryset = queryset.filter(popularity_99=popularity)
+            if  popularity_gt:
+               queryset = queryset.filter(popularity_99__gt=popularity_gt)
+            if  popularity_lt:
+               queryset = queryset.filter(popularity_99__lt=popularity_lt)
+            if  imdb_score_to_search:
+               queryset = queryset.filter(imdb_score=imdb_score_to_search)
+            if  imdb_score_gt:
+               queryset = queryset.filter(imdb_score__gt=imdb_score_gt)
+            if  imdb_score_lt:
+               queryset = queryset.filter(imdb_score__lt=imdb_score_lt)
             return queryset
 
 class MovieCreateAPIView(CreateAPIView):
